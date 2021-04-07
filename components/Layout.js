@@ -24,22 +24,23 @@ const Layout = ({ children }) => {
       >
         <Container maxW="container.lg" height="50" py="2">
           <Flex>
-            <LinkOverlay href="/">
-              <Flex>
-                <Box>
+            <Flex>
+              <Box>
+                <Link href="/">
                   <Image
                     src="/images/eai_logo.png"
                     alt="Eleuther logo"
                     boxSize="35"
+                    cursor="pointer"
                   />
-                </Box>
-                <Box mt={1.5} ml={3}>
-                  <Heading as="h1" fontSize="1.2em">
-                    EleutherAI
-                  </Heading>
-                </Box>
-              </Flex>
-            </LinkOverlay>
+                </Link>
+              </Box>
+              <Box mt={1.5} ml={3}>
+                <Heading as="h1" fontSize="1.2em">
+                  <Link href="/">EleutherAI</Link>
+                </Heading>
+              </Box>
+            </Flex>
 
             <Spacer display={{ base: "none", sm: "none", md: "block" }} />
             <Text display={{ base: "none", sm: "none", md: "block" }} mt={1.5}>
