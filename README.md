@@ -1,14 +1,15 @@
-# EEGI web app
+# EEGI
 
-## Description
+Made with NextJS (React) and ChakraUI
 
-Web application by EleutherAi which enables Large transformer models to learn from human feedback
+## Getting Started
 
-## How to run
+First, run the development server:
 
-1. npm install
-2. npm start
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-## Contacts
-
-https://www.eleuther.ai/
+Deploy on Netlify
