@@ -5,12 +5,20 @@ const config = {
   config: {
     initialColorMode: "dark",
     useSystemColorMode: false
-  },  
+  },
+  colors: {
+    eleuther: {
+      lightBlue: "#00BBFF",
+      black: "#000000",
+      darkBlue: "#0C7489",
+      darkGrey: "#4A4A4A"
+    }
+  },
   components: {
-    Link: {      
+    Link: {
       baseStyle: {
         color: "#0bf"
-      },
+      }
     },
     Button: {
       variants: {
@@ -23,7 +31,7 @@ const config = {
         variant: "outline"
       }
     }
-  },
+  }
 }
 
 // 3. extend the theme
