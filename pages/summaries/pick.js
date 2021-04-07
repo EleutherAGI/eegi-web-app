@@ -20,28 +20,26 @@ const pick = () => {
         ]
     ]
     const [chosenSummary, setChosenSummary] = useState('')
-    const [summaryIndex, setSummaryIndex] = useState(0)
     const [confirmedChoices, setConfirmedChoices] = useState([])
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "summary",
         onChange: setChosenSummary
     })
     const group = getRootProps()
-    const confirmChoise = () => {
+    const confirmChoice = () => {
         if (chosenSummary == "") return;
         console.log("You picked: " + chosenSummary)
         setConfirmedChoices([...confirmedChoices, chosenSummary])
         setChosenSummary("")
-        setSummaryIndex(summaryIndex+1)
     }
     return (
         <VStack align="start" spacing={8}>
             <BackHomeButton />
-            <Heading size="lg">Pick a human generated summary:</Heading>
-            {summaryIndex < summaries.length ?
+            {confirmedChoices.length < summaries.length ?
                 <>
+                    <Heading size="lg">Pick a human generated summary:</Heading>
                     <VStack align="start" spacing={2} {...group}>
-                        {summaries[summaryIndex].map((value,i)=> {
+                        {summaries[confirmedChoices.length].map((value,i)=> {
                             const radio = getRadioProps({ value })
                             return (
                                 <RadioCard key={i} {...radio}>
@@ -50,13 +48,13 @@ const pick = () => {
                             )
                         })}
                     </VStack> 
-                    <Button variant="outline" colorScheme="blue" rightIcon={<ArrowForwardIcon w={5} h={5} />} onClick={confirmChoise} disabled={!chosenSummary}>Confirm</Button>
+                    <Button rightIcon={<ArrowForwardIcon w={5} h={5} />} onClick={confirmChoice} disabled={!chosenSummary}>Confirm</Button>
                 </>
             :
                 <>
+                    <Heading size="lg">Thank you!</Heading>
                     <Text>
-                        You have reached the end of our current dummy data. 
-                        This is just a demo of our basic layout.
+                        You have reached the end of our current demo. 
                     </Text>
                     <Text>
                         These are your choices:

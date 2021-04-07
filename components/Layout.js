@@ -1,12 +1,28 @@
-import { Center, Container, Heading } from "@chakra-ui/react"
+import { Center, Container, VStack, Box, Flex, Spacer } from "@chakra-ui/react"
+import Link from 'next/link'
 
 const Layout = ({children}) => {
     return (
-    <Center h="100vh">
-        <Container maxW="3xl" w="80vw">
-            {children}
-        </Container>
-    </Center>
+        <VStack h="100vh" align="stretch">
+            <Box bg="#000" py=".1em">
+                <Container maxW="container.lg">
+                    <Flex>
+                        <Box><a href="https://eleuther.ai"><img src="/logo.jpg" /></a></Box>
+                        <Spacer />
+                        <Center>
+                            <Link href="/">
+                                Eleuther Experiments in General Intelligence
+                            </Link>
+                        </Center>
+                    </Flex>
+                </Container>
+            </Box>
+            <Center h="100%">
+                <Container maxW="container.lg">
+                    {children}
+                </Container>
+            </Center>
+        </VStack>
     )
 }
 
