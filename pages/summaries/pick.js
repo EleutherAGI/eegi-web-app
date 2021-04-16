@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   VStack,
   StackDivider,
@@ -6,7 +6,6 @@ import {
   Text,
   Button,
   useRadioGroup,
-  Container,
   Center
 } from "@chakra-ui/react"
 import { ArrowForwardIcon } from "@chakra-ui/icons"
@@ -46,6 +45,7 @@ const pick = () => {
     name: "summary",
     onChange: setChosenSummary
   })
+  const [currentNumberKey, setCurrentNumberKey] = useState()
   const group = getRootProps()
   const confirmChoice = () => {
     if (chosenSummary == "") return
@@ -53,6 +53,28 @@ const pick = () => {
     setConfirmedChoices([...confirmedChoices, chosenSummary])
     setChosenSummary("")
   }
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      const char = e.which || e.keyCode
+      if (e.code === "Space") {
+        confirmChoice()
+      } else if (char === 49) {
+        setCurrentNumberKey(1)
+        setChosenSummary(summaries[confirmedChoices.length].summaries[0])
+      } else if (char === 50) {
+        setCurrentNumberKey(2)
+        setChosenSummary(summaries[confirmedChoices.length].summaries[1])
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return function cleanup() {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [setChosenSummary, chosenSummary, setCurrentNumberKey])
+
   return (
     <VStack align="start" spacing={8}>
       <BackHomeButton />
@@ -76,7 +98,12 @@ const pick = () => {
             {summaries[confirmedChoices.length].summaries.map((value, i) => {
               const radio = getRadioProps({ value })
               return (
-                <RadioCard key={i} {...radio}>
+                <RadioCard
+                  key={i}
+                  {...radio}
+                  isChecked={chosenSummary && currentNumberKey === i + 1}
+                  autoFocus={true}
+                >
                   {value}
                 </RadioCard>
               )

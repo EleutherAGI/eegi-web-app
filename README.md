@@ -12,3 +12,6 @@ npm run dev
 
 ## Deployment
 Deploy on Netlify
+
+## Instructions
+Choose the better AI summarisation of the human text. You can use your keyboard to be faster. [1] for the first summary, [2] for the second and [space] to confirm.
