@@ -1,6 +1,6 @@
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import Layout from "./Layout";
-import Pick from "./summaries/Pick";
+import Layout from "../components/Layout";
+import Pick from "./Pick";
 import Home from "./Home";
 
 export default function App() {

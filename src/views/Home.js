@@ -14,15 +14,12 @@ export default function Home() {
                 borderLeft="4px"
                 borderColor="gray.600"
             >
-                Inspired by this
-                <Link href="https://arxiv.org/pdf/2009.01325.pdf" isExternal>
-                    OpenAI paper
-                </Link>
-                we decided to explore the capability of our NLP models when
-                learning from human feedback. The idea is to create a web
-                interface where users could rate the quality of the NLP model
-                output (like summarization) and use this data to improve the
-                model.
+                EEGI is an ongoing research project studying the uses and control of large language models. 
+                This website acts to facilitate dynamic collection of data on human/AI interaction. 
+                We hope that by more tightly integrating direct human evaluations into the training loop we can 
+                steer the behavior of our models to more desirable outcomes.
+                Our first experiment is an attempt to teach a model what kinds of texts humans rate 
+                highly and then use that to filter large datasets.
             </Text>
             <Heading my="2rem" as="h3" size="md">
                 Pick a human generated summary.
