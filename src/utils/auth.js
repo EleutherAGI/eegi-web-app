@@ -1,60 +1,42 @@
 import decodeJwt from 'jwt-decode';
+
+
 export const isAuthenticated = () => {
-    const permissions = localStorage.getItem('permissions');
-    if (!permissions) {
+    const sub = localStorage.getItem('user');
+    console.log(sub);
+    if (!sub) {
         return false;
     }
-    return permissions === 'user' || permissions === 'admin' ? true : false;
+    return true;
 };
-/**
- * Login to backend and store JSON web token on success
- *
- * @param email
- * @param password
- * @returns JSON data containing access token on success
- * @throws Error on http errors or failed attempts
- */
-export const login = async (email, password) => {
+
+export const signIn = async (email, password) => {
     // Assert email or password is not empty
     if (!(email.length > 0) || !(password.length > 0)) {
         throw new Error('Email or password was not provided');
     }
-    const formData = new FormData();
-    // OAuth2 expects form data, not JSON data
-    formData.append('username', email);
-    formData.append('password', password);
-    const request = new Request('/api/token', {
+    const requestOptions = {
         method: 'POST',
-        body: formData,
-    });
-    const response = await fetch(request);
-    if (response.status === 500) {
-        throw new Error('Internal server error');
-    }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password})
+    };
+    const response = await fetch('http://localhost:8000/api/v1/login', requestOptions);
     const data = await response.json();
-    if (response.status > 400 && response.status < 500) {
-        if (data.detail) {
-            throw data.detail;
-        }
-        throw data;
-    }
+
+    console.log(data);
+
     if ('access_token' in data) {
         const decodedToken = decodeJwt(data['access_token']);
         localStorage.setItem('token', data['access_token']);
-        localStorage.setItem('permissions', decodedToken.permissions);
+        localStorage.setItem('user', decodedToken.sub);
+
+        // TODO add admin check for admin console
+        // involves changing JWT in backend
+
     }
     return data;
 };
-/**
- * Sign up via backend and store JSON web token on success
- *
- * @param email
- * @param password
- * @param name
- * @param key
- * @returns JSON data containing access token on success
- * @throws Error on http errors or failed attempts
- */
+
 export const signUp = async (email, password, name, key) => {
     // Assert email or password or password confirmation is not empty
     if (!(email.length > 0)) {
@@ -69,32 +51,20 @@ export const signUp = async (email, password, name, key) => {
     if (!(key.length > 0)) {
         throw new Error('key was not provided');
     }
-    const formData = new FormData();
-    // OAuth2 expects form data, not JSON data
-    formData.append('username', email);
-    formData.append('password', password);
-    formData.append('first_name', name);
-    formData.append('key', key);
-    const request = new Request('/api/signup', {
+
+    const requestOptions = {
         method: 'POST',
-        body: formData,
-    });
-    const response = await fetch(request);
-    if (response.status === 500) {
-        throw new Error('Internal server error');
-    }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password, first_name: name, key: key})
+    };
+    const response = await fetch('http://localhost:8000/api/v1/key_signup', requestOptions);
+
     const data = await response.json();
-    if (response.status > 400 && response.status < 500) {
-        if (data.detail) {
-            throw data.detail;
-        }
-        throw data;
+
+    if(data.message != 'success' && response){
+        return data;
     }
-    if ('access_token' in data) {
-        const decodedToken = decodeJwt(data['access_token']);
-        localStorage.setItem('token', data['access_token']);
-        localStorage.setItem('permissions', decodedToken.permissions);
-    }
+
     return data;
 };
 export const logout = () => {

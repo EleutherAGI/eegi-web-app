@@ -1,14 +1,12 @@
 
 import React, { useState } from 'react';
 import { Heading, Button, Text, Link, Input, Stack, InputGroup, InputRightElement, Box, CircularProgress } from "@chakra-ui/react";
-import { signUp, isAuthenticated } from '../utils/auth';
+import { signIn, isAuthenticated } from '../utils/auth';
 
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-    const [key, setKey] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     
@@ -16,14 +14,12 @@ export default function SignUp() {
     const [showPassword, setPasswordShow] = React.useState(false)
     const handlePasswordClick = () => setPasswordShow(!showPassword)
 
-    const [showKey, setKeyShow] = React.useState(false)
-    const handleKeyClick = () => setKeyShow(!showKey)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
         setIsLoading(true);
-        const data = await signUp(email, password, name, key);
+        const data = await signIn(email, password);
           
         if (data.message == 'success'){
             console.log(data.message)
@@ -41,9 +37,8 @@ export default function SignUp() {
                 {error && (
                         <Text>{error}</Text>
                 )}
-                <Input type="name" placeholder="First name" onChange={e => setName(e.currentTarget.value)}/>
 
-                <Input type="email" placeholder="Email" onChange={e => setEmail(e.currentTarget.value)}/>
+                <Input type="name" placeholder="Email" onChange={e => setEmail(e.currentTarget.value)}/>
 
                 <InputGroup size="md">
                     <Input
@@ -59,19 +54,6 @@ export default function SignUp() {
                     </InputRightElement>
                 </InputGroup>
 
-                <InputGroup size="md">
-                    <Input
-                        pr="4.5rem"
-                        type={showKey ? "text" : "password"}
-                        placeholder="Access Key"
-                        onChange={e => setKey(e.currentTarget.value)}
-                    />
-                    <InputRightElement width="4.5rem">
-                        <Button h="1.75rem" size="sm" onClick={handleKeyClick}>
-                        {showKey ? "Hide" : "Show"}
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
                 <Button type="submit">
                 {isLoading ? (
                     <CircularProgress
