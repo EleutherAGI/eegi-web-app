@@ -69,5 +69,5 @@ export const signUp = async (email, password, name, key) => {
 };
 export const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('permissions');
+    localStorage.removeItem('user');
 };

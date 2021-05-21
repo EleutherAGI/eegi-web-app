@@ -9,9 +9,13 @@ import {
     Image,
     Text,
     Link,
+    Button,
 } from "@chakra-ui/react";
 import { Link as RouterLink, Route } from "react-router-dom";
 import EaiLogo from "../images/eai_logo.png"
+
+
+import { logout, isAuthenticated } from '../utils/auth';
 
 const Layout = ({ children }) => {
     return (
@@ -52,6 +56,15 @@ const Layout = ({ children }) => {
                         >
                             Eleuther Experiments in General Intelligence
                         </Text>
+                        <Spacer
+                            display={{ base: "none", sm: "none", md: "block" }}
+                        />
+                        {isAuthenticated() ?
+                         <Button onClick={() => logout()}>Logout</Button> :
+                         <Link as={RouterLink} to="/signin">
+                            <Button>Sign in</Button>
+                         </Link>}
+                        
                     </Flex>
                 </Container>
             </Box>
