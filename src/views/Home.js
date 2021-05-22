@@ -24,7 +24,7 @@ export default function Home() {
             <Heading my="2rem" as="h3" size="md">
                 Pick a human generated summary.
             </Heading>
-            <Link as={RouterLink} to="/summaries/pick">
+            <Link as={RouterLink} to="/filter/pick">
                 <Button rightIcon={<ArrowForwardIcon w={5} h={5} />}>
                     Begin
                 </Button>

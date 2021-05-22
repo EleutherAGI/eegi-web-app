@@ -9,10 +9,10 @@ import {
     Center
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import BackHomeButton from "../components/BackHomeButton";
-import RadioCard from "../components/RadioCard";
+import BackHomeButton from "../../components/BackHomeButton";
+import RadioCard from "../../components/RadioCard";
 
-export default function Pick() {
+export default function CompareSummary() {
     const summaries = [
         {
             textToSummarize:

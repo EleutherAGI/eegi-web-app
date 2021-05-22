@@ -2,7 +2,7 @@
 import ReactDom from "react-dom";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "./styles/theme";
-import Navigation from "./views/Navigation";
+import Navigation from "./Navigation";
 
 ReactDom.render(
     <React.StrictMode>

@@ -1,10 +1,11 @@
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import Layout from "../components/Layout";
-import Pick from "./Pick";
-import Home from "./Home";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import PrivateRoute from "./PrivateRoute"
+import Layout from "./components/Layout";
+//import CompareSummary from "./views/project/Summarize";
+import CompareText from "./views/project/Filter";
+import Home from "./views/Home";
+import SignUp from "./views/SignUp";
+import SignIn from "./views/SignIn";
+import PrivateRoute from "./views/PrivateRoute"
 
 export default function App() {
     // TODO show error message if no route match?
@@ -15,7 +16,7 @@ export default function App() {
                     <PrivateRoute exact path="/" component={Home} />
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/signin" component={SignIn} />
-                    <Route exact path="/summaries/pick" component={Pick} />
+                    <Route exact path="/filter/pick" component={CompareText} />
                 </Switch>
             </Layout>
         </Router>
