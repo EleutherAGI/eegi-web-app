@@ -5,7 +5,7 @@ import CompareText from "./views/project/Filter";
 import Home from "./views/Home";
 import SignUp from "./views/SignUp";
 import SignIn from "./views/SignIn";
-import PrivateRoute from "./views/PrivateRoute"
+import PrivateRoute from "./views/PrivateRoute";
 
 export default function App() {
     // TODO show error message if no route match?
