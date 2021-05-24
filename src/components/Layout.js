@@ -9,13 +9,14 @@ import {
     Image,
     Text,
     Link,
-    Button,
+    Button
 } from "@chakra-ui/react";
-import { Link as RouterLink, Route } from "react-router-dom";
-import EaiLogo from "../images/eai_logo.png"
+import { LockIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from "react-router-dom";
 
+import EaiLogo from "../images/eai_logo.png";
 
-import { logout, isAuthenticated } from '../utils/auth';
+import { logout, checkIfAuthenticated } from "../utils/auth";
 
 const Layout = ({ children }) => {
     return (
@@ -42,7 +43,9 @@ const Layout = ({ children }) => {
                             </Box>
                             <Box mt={1.5} ml={3}>
                                 <Heading as="h1" fontSize="1.2em">
-                                    <Link as={RouterLink} to="/">EleutherAI</Link>
+                                    <Link as={RouterLink} to="/">
+                                        EleutherAI
+                                    </Link>
                                 </Heading>
                             </Box>
                         </Flex>
@@ -59,12 +62,20 @@ const Layout = ({ children }) => {
                         <Spacer
                             display={{ base: "none", sm: "none", md: "block" }}
                         />
-                        {isAuthenticated() ?
-                         <Button onClick={() => logout()}>Logout</Button> :
-                         <Link as={RouterLink} to="/signin">
-                            <Button>Sign in</Button>
-                         </Link>}
-                        
+                        <Box ml="auto">
+                            {checkIfAuthenticated() ? (
+                                <Button size="sm" onClick={() => logout()}>
+                                    Logout
+                                </Button>
+                            ) : (
+                                <Link as={RouterLink} to="/signin">
+                                    <Button size="sm">
+                                        <LockIcon w={3} h={3} mr={1} />
+                                        Sign in
+                                    </Button>
+                                </Link>
+                            )}
+                        </Box>
                     </Flex>
                 </Container>
             </Box>

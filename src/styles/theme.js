@@ -17,14 +17,24 @@ const config = {
     components: {
         Link: {
             baseStyle: {
-                color: "#0bf"
+                textDecoration: "none",
+                _hover: {
+                    textDecoration: "none"
+                }
+            },
+            variants: {
+                "text-link": {
+                    color: "#00BBFF",
+                    textDecoration: "underline"
+                }
             }
         },
         Button: {
             variants: {
                 outline: {
-                    color: "#0bf",
-                    borderColor: "#0bf"
+                    color: "#00BBFF",
+                    borderColor: "#00BBFF",
+                    textDecoration: "none"
                 }
             },
             defaultProps: {
