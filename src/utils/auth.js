@@ -2,8 +2,16 @@ import decodeJwt from "jwt-decode";
 
 export const checkIfAuthenticated = () => {
     const sub = localStorage.getItem("user");
-    console.log(sub);
     if (!sub) {
+        return false;
+    }
+    return true;
+};
+
+export const checkIfAdmin = () => {
+    const sub = localStorage.getItem("user");
+    const admin = localStorage.getItem("permission");
+    if (!sub && !admin) {
         return false;
     }
     return true;
@@ -31,6 +39,7 @@ export const signIn = async (email, password) => {
         const decodedToken = decodeJwt(data["access_token"]);
         localStorage.setItem("token", data["access_token"]);
         localStorage.setItem("user", decodedToken.sub);
+        localStorage.setItem("permission", decodedToken.perm);
 
         // TODO add admin check for admin console
         // involves changing JWT in backend
@@ -79,4 +88,5 @@ export const signUp = async (email, password, name, key) => {
 export const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("permission");
 };
