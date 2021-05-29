@@ -2,6 +2,7 @@ import decodeJwt from "jwt-decode";
 
 export const checkIfAuthenticated = () => {
     const sub = localStorage.getItem("user");
+    console.log("auth: ", sub);
     if (!sub) {
         return false;
     }
@@ -28,7 +29,7 @@ export const signIn = async (email, password) => {
         body: JSON.stringify({ email: email, password: password })
     };
     const response = await fetch(
-        "http://localhost:8000/api/v1/login",
+        "http://vm.eleuther.ai:8888/api/v1/login",
         requestOptions
     );
     const data = await response.json();
@@ -73,7 +74,7 @@ export const signUp = async (email, password, name, key) => {
         })
     };
     const response = await fetch(
-        "http://localhost:8000/api/v1/key_signup",
+        "http://vm.eleuther.ai:8888/api/v1/key_signup",
         requestOptions
     );
 
