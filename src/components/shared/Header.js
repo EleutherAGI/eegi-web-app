@@ -12,13 +12,12 @@ import {
     Button
 } from "@chakra-ui/react";
 import { LockIcon } from "@chakra-ui/icons";
-import { Link as RouterLink, useHistory } from "react-router-dom";
-
+import { Link as RouterLink } from "react-router-dom";
 import EaiLogo from "../../images/eai_logo.png";
 import { logout, checkIfAuthenticated } from "../../utils/auth";
+import { withRouter } from "react-router-dom";
 
-export default function Header() {
-    const history = useHistory();
+const Header = ({ history, isAuthenticated }) => {
     return (
         <Box
             bg="#000"
@@ -85,4 +84,6 @@ export default function Header() {
             </Container>
         </Box>
     );
-}
+};
+
+export default withRouter(Header);
