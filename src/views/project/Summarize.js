@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import {
-    VStack,
-    StackDivider,
-    Heading,
-    Text,
-    Button,
     useRadioGroup,
-    Center
+    Center,
+    Heading,
+    Button,
+    Text,
+    Input,
+    Stack,
+    InputGroup,
+    InputRightElement,
+    Container,
+    CircularProgress,
+    Link,
+    VStack
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BackHomeButton from "../../components/BackHomeButton";
@@ -49,7 +55,6 @@ export default function CompareSummary() {
     const group = getRootProps();
     const confirmChoice = () => {
         if (chosenSummary == "") return;
-        console.log("You picked: " + chosenSummary);
         setConfirmedChoices([...confirmedChoices, chosenSummary]);
         setChosenSummary("");
     };
@@ -80,68 +85,112 @@ export default function CompareSummary() {
     }, [setChosenSummary, chosenSummary, setCurrentNumberKey]);
 
     return (
-        <VStack align="start" spacing={8}>
-            <BackHomeButton />
-            {confirmedChoices.length < summaries.length ? (
-                <>
-                    <Heading textAlign="center" size="lg" width="100%">
-                        Summarisation Experiment
-                    </Heading>
-                    <Center
-                        backgroundColor="eleuther.black"
-                        border="1px solid"
-                        borderColor="#cccccc"
-                        p={2}
+        <VStack h="100vh" align="stretch">
+            <Header />
+            <Center h="100%" px="2rem">
+                <Container maxW="container.lg">
+                    <Container
+                        p={8}
+                        maxWidth="500px"
+                        borderWidth={1}
+                        borderRadius={8}
+                        boxShadow="lg"
+                        ml="auto"
+                        mr="auto"
                     >
-                        {summaries[confirmedChoices.length].textToSummarize}
-                    </Center>
-                    <Heading size="md" width="100%" textAlign="center">
-                        Please choose the better summarisation of the text above
-                    </Heading>
-                    <VStack align="start" spacing={2} {...group}>
-                        {summaries[confirmedChoices.length].summaries.map(
-                            (value, i) => {
-                                const radio = getRadioProps({ value });
-                                return (
-                                    <RadioCard
-                                        key={i}
-                                        {...radio}
-                                        isChecked={
-                                            chosenSummary &&
-                                            currentNumberKey === i + 1
-                                        }
-                                        autoFocus={true}
+                        <VStack align="start" spacing={8}>
+                            <BackHomeButton />
+                            {confirmedChoices.length < summaries.length ? (
+                                <>
+                                    <Heading
+                                        textAlign="center"
+                                        size="lg"
+                                        width="100%"
                                     >
-                                        {value}
-                                    </RadioCard>
-                                );
-                            }
-                        )}
-                    </VStack>
-                    <Button
-                        rightIcon={<ArrowForwardIcon w={5} h={5} />}
-                        onClick={confirmChoice}
-                        disabled={!chosenSummary}
-                    >
-                        Confirm
-                    </Button>
-                </>
-            ) : (
-                <>
-                    <Heading size="lg">Thank you!</Heading>
-                    <Text>You have reached the end of our current demo.</Text>
-                    <Text>These are your choices:</Text>
-                    <VStack
-                        align="start"
-                        spacing={2}
-                        divider={<StackDivider borderColor="blue.700" />}
-                    >
-                        {confirmedChoices.map((value, i) => (
-                            <Text key={i}>{value}</Text>
-                        ))}
-                    </VStack>
-                </>
-            )}
+                                        Summarisation Experiment
+                                    </Heading>
+                                    <Center
+                                        backgroundColor="eleuther.black"
+                                        border="1px solid"
+                                        borderColor="#cccccc"
+                                        p={2}
+                                    >
+                                        {
+                                            summaries[confirmedChoices.length]
+                                                .textToSummarize
+                                        }
+                                    </Center>
+                                    <Heading
+                                        size="md"
+                                        width="100%"
+                                        textAlign="center"
+                                    >
+                                        Please choose the better summarisation
+                                        of the text above
+                                    </Heading>
+                                    <VStack
+                                        align="start"
+                                        spacing={2}
+                                        {...group}
+                                    >
+                                        {summaries[
+                                            confirmedChoices.length
+                                        ].summaries.map((value, i) => {
+                                            const radio = getRadioProps({
+                                                value
+                                            });
+                                            return (
+                                                <RadioCard
+                                                    key={i}
+                                                    {...radio}
+                                                    isChecked={
+                                                        chosenSummary &&
+                                                        currentNumberKey ===
+                                                            i + 1
+                                                    }
+                                                    autoFocus={true}
+                                                >
+                                                    {value}
+                                                </RadioCard>
+                                            );
+                                        })}
+                                    </VStack>
+                                    <Button
+                                        rightIcon={
+                                            <ArrowForwardIcon w={5} h={5} />
+                                        }
+                                        onClick={confirmChoice}
+                                        disabled={!chosenSummary}
+                                    >
+                                        Confirm
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Heading size="lg">Thank you!</Heading>
+                                    <Text>
+                                        You have reached the end of our current
+                                        demo.
+                                    </Text>
+                                    <Text>These are your choices:</Text>
+                                    <VStack
+                                        align="start"
+                                        spacing={2}
+                                        divider={
+                                            <StackDivider borderColor="blue.700" />
+                                        }
+                                    >
+                                        {confirmedChoices.map((value, i) => (
+                                            <Text key={i}>{value}</Text>
+                                        ))}
+                                    </VStack>
+                                </>
+                            )}
+                        </VStack>
+                    </Container>
+                </Container>
+            </Center>
+            <Footer />
         </VStack>
     );
 }
