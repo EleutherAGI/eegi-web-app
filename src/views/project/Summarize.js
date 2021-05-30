@@ -55,7 +55,6 @@ export default function CompareSummary() {
     const group = getRootProps();
     const confirmChoice = () => {
         if (chosenSummary == "") return;
-        console.log("You picked: " + chosenSummary);
         setConfirmedChoices([...confirmedChoices, chosenSummary]);
         setChosenSummary("");
     };

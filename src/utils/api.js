@@ -7,8 +7,6 @@ export const getComparison = async () => {
         }
     };
 
-    console.log(localStorage.getItem("token"));
-
     const response = await fetch(
         "http://vm.eleuther.ai:8888/api/v1/filter/comparisons",
         requestOptions

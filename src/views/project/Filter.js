@@ -33,7 +33,6 @@ export default function CompareText() {
     useEffect(() => {
         getComparison()
             .then((res) => {
-                console.log(res);
                 setNextSample(res);
                 setSample(nextSample);
                 setIsLoading(false);

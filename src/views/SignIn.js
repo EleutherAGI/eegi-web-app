@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
     Heading,
     Button,
@@ -14,20 +14,17 @@ import {
     VStack
 } from "@chakra-ui/react";
 import { signIn } from "../utils/auth";
-import { Link as RouterLink, Route, useHistory } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
 
 const SignIn = () => {
-    // console.log("props in signup comp: ", props);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const [showPassword, setPasswordShow] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const handlePasswordClick = () => setPasswordShow(!showPassword);
     const history = useHistory();
 
@@ -35,18 +32,20 @@ const SignIn = () => {
         event.preventDefault();
         setError("");
         setIsLoading(true);
-        const data = await signIn(email, password);
-
-        console.log("waiting data response: ", data);
-
-        if (data.access_token && data.session_id && !!data.user.is_active) {
-            console.log(data.message);
-            setIsAuthenticated(true);
-            history.replace("/");
+        if (!email) {
+            setError("Email was not provided");
+        } else if (!password) {
+            setError("Password was not provided");
         } else {
-            setError(data.message);
-            setIsAuthenticated(false);
+            const data = await signIn(email, password);
+
+            if (data.access_token && data.session_id && !!data.user.is_active) {
+                history.replace("/");
+            } else {
+                setError(data.message);
+            }
         }
+
         setIsLoading(false);
     };
 

@@ -1,6 +1,4 @@
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-//import CompareSummary from "./views/project/Summarize";
 import CompareText from "./views/project/Filter";
 import Home from "./views/Home";
 import SignUp from "./views/SignUp";

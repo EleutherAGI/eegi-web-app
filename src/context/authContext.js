@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-
+// Isnt used for now, but I will set it up in the future.
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
