@@ -14,7 +14,7 @@ import {
 import { LockIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 import EaiLogo from "../../images/eai_logo.png";
-import { logout, checkIfAuthenticated } from "../../utils/auth";
+import { logout, checkIfAuthenticated, checkIfAdmin } from "../../utils/auth";
 import { withRouter } from "react-router-dom";
 
 const Header = ({ history, isAuthenticated }) => {
@@ -79,6 +79,13 @@ const Header = ({ history, isAuthenticated }) => {
                                 </Button>
                             </Link>
                         )}
+                        {checkIfAdmin() &&
+                            <Link as={RouterLink} to="/admin">
+                                <Button size="sm">
+                                    Admin
+                                </Button>
+                            </Link>
+                        }
                     </Box>
                 </Flex>
             </Container>

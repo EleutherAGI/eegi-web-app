@@ -5,9 +5,16 @@ import CompareText from "./views/project/Filter";
 import Home from "./views/Home";
 import SignUp from "./views/SignUp";
 import SignIn from "./views/SignIn";
-import PrivateRoute from "./views/PrivateRoute";
+import PrivateRoute, {AdminRoute} from "./views/PrivateRoute";
 import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
+
+import AdminHome from "./views/admin/Home";
+import ListUsers from "./views/admin/ListUsers";
+import ListComparisons from "./views/admin/ListComparisons";
+import CreateKey from "./views/admin/CreateKey";
+import CreateUser from "./views/admin/CreateUser";
+import UpdateUser from "./views/admin/UpdateUser";
 
 const App = () => {
     // TODO show error message if no route match?
@@ -42,6 +49,36 @@ const App = () => {
                                     exact
                                     path="/signin"
                                     component={SignIn}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/create_user"
+                                    component={CreateUser}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/create_key"
+                                    component={CreateKey}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/list_users/:page?"
+                                    component={ListUsers}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/list_comparisons/:page?"
+                                    component={ListComparisons}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/update_user/:id?"
+                                    component={UpdateUser}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin"
+                                    component={AdminHome}
                                 />
                             </Switch>
                         </Container>

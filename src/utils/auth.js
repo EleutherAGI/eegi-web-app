@@ -11,7 +11,8 @@ export const checkIfAuthenticated = () => {
 export const checkIfAdmin = () => {
     const sub = localStorage.getItem("user");
     const admin = localStorage.getItem("permission");
-    if (!sub && !admin) {
+
+    if (!sub || admin == "false") {
         return false;
     }
     return true;
