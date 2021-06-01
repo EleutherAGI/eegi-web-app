@@ -3,15 +3,13 @@ import {
     Heading,
     Button,
     Text,
-    RadioGroup,
-    Radio,
     useRadioGroup,
-    VStack
+    VStack,
+    CircularProgress
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BackHomeButton from "../../components/BackHomeButton";
 import RadioCard from "../../components/RadioCard";
-// TODO use RadioCard again, i just couldn't figure out how to integrate it
 import { getComparison, updateComparison } from "../../utils/api";
 
 export default function CompareText() {
@@ -41,32 +39,41 @@ export default function CompareText() {
     }, [page]);
 
     const confirmChoice = async () => {
+        if (!sample || currentNumberKey === -1) return;
         setIsLoading(true);
         const data = await updateComparison(
             currentNumberKey === 0 ? true : false,
             sample.comparison_id
         );
+
+        if (data.message === "success") {
+            setCurrentNumberKey(-1);
+            setPage(page + 1);
+        } else {
+            console.warn("unable to send the data. ", data);
+        }
         setIsLoading(false);
-        setCurrentNumberKey(-1);
-        setPage(page + 1);
     };
 
-    useEffect(() => {
-        function handleKeyDown(e) {
-            const char = e.which || e.keyCode;
-            if (e.code === "Space") {
-                confirmChoice();
-            } else if (char === 49) {
-                setCurrentNumberKey("0");
-            } else if (char === 50) {
-                setCurrentNumberKey("1");
-            }
-        }
-        window.addEventListener("keydown", handleKeyDown);
-        return function cleanup() {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [setCurrentNumberKey, currentNumberKey]);
+    // Temporary disable keyboard keys until we figure it out
+    // useEffect(() => {
+    //     if (sample && page !== 1) {
+    //         function handleKeyDown(e) {
+    //             const char = e.which || e.keyCode;
+    //             if (e.code === "Space") {
+    //                 confirmChoice();
+    //             } else if (char === 49) {
+    //                 setCurrentNumberKey(0);
+    //             } else if (char === 50) {
+    //                 setCurrentNumberKey(1);
+    //             }
+    //         }
+    //         window.addEventListener("keydown", handleKeyDown);
+    //         return function cleanup() {
+    //             window.removeEventListener("keydown", handleKeyDown);
+    //         };
+    //     }
+    // }, [setCurrentNumberKey, currentNumberKey]);
 
     const StartPage = () => {
         return (
@@ -112,9 +119,13 @@ export default function CompareText() {
                 <Button
                     rightIcon={<ArrowForwardIcon w={5} h={5} />}
                     onClick={confirmChoice}
-                    disabled={currentNumberKey == -1}
+                    disabled={currentNumberKey === -1}
                 >
-                    Confirm
+                    {isLoading ? (
+                        <CircularProgress isIndeterminate size="24px" />
+                    ) : (
+                        "Confirm"
+                    )}
                 </Button>
             </>
         );
