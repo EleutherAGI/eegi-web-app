@@ -14,7 +14,7 @@ import {
     Link
 } from "@chakra-ui/react";
 
-import { signUp } from "../../utils/auth";
+import { createKey } from "../../utils/api";
 
 export default function CreateKey() {
 
@@ -24,7 +24,7 @@ export default function CreateKey() {
     const history = useHistory();
     const [key, setKey] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
-
+    const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const [showSignupSuccess, setShowSignupSuccess] = useState(false);
@@ -37,16 +37,10 @@ export default function CreateKey() {
         event.preventDefault();
         setError("");
         setIsLoading(true);
-        if (!name) {
-            setError("Name was not provided");
-        } else if (!email) {
-            setError("Email was not provided");
-        } else if (!password) {
-            setError("Password was not provided");
-        } else if (!key) {
+        if (!key) {
             setError("Access Key was not provided");
         } else {
-            const data = await signUp(email, password, name, key);
+            const data = await createKey(key, isAdmin);
 
             if (data.message == "success") {
                 setShowSignupSuccess(true);
@@ -63,25 +57,21 @@ export default function CreateKey() {
         <>
             {showSignupSuccess ? (
                 <Container maxW="container.lg">
-                    <Heading mb="1rem">Sign up Success!</Heading>
+                    <Heading mb="1rem">Key Created</Heading>
                     <div>
                         <p>
                             Your signup has been succesfull. Please proceed to
                             sign in the page and enter your credentials.
                         </p>
-                        <Link
-                            as={RouterLink}
-                            to="/signin"
-                            variant="text-link"
-                            ml={1}
-                        >
-                            Sign In
-                        </Link>
+                        <Button type="submit" onClick={() => {setShowSignupSuccess(false)}}>
+                            "Create another key"
+                        </Button>
                     </div>
                 </Container>
             ) : (
                 <form onSubmit={handleSubmit}>
                     <Heading mb="1rem">Sign up</Heading>
+                    {error && <Text>{error}</Text>}
                     <Stack spacing={4}>
                         <InputGroup size="md">
                             <Input

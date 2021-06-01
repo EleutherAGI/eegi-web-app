@@ -17,6 +17,11 @@ export default function AdminHome() {
                         List Comparison
                     </Button>
                 </Link>
+                <Link as={RouterLink} to="/admin/list_keys">
+                    <Button rightIcon={<Search2Icon w={5} h={5} />}>
+                        List keys
+                    </Button>
+                </Link>
                 <Link as={RouterLink} to="/admin/create_key">
                     <Button rightIcon={<AddIcon w={5} h={5} />}>
                         Create key

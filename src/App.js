@@ -12,6 +12,7 @@ import Footer from "./components/shared/Footer";
 import AdminHome from "./views/admin/Home";
 import ListUsers from "./views/admin/ListUsers";
 import ListComparisons from "./views/admin/ListComparisons";
+import ListKeys from "./views/admin/ListKeys";
 import CreateKey from "./views/admin/CreateKey";
 import CreateUser from "./views/admin/CreateUser";
 import UpdateUser from "./views/admin/UpdateUser";
@@ -69,6 +70,11 @@ const App = () => {
                                     exact
                                     path="/admin/list_comparisons/:page?"
                                     component={ListComparisons}
+                                />
+                                <AdminRoute
+                                    exact
+                                    path="/admin/list_keys/:page?"
+                                    component={ListKeys}
                                 />
                                 <AdminRoute
                                     exact
