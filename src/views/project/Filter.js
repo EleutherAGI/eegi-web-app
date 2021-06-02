@@ -10,7 +10,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BackHomeButton from "../../components/BackHomeButton";
 import RadioCard from "../../components/RadioCard";
-import { getComparison, updateComparison } from "../../utils/api";
+import { getComparison, createComparison } from "../../utils/api";
 
 export default function CompareText() {
     const [page, setPage] = useState(1);
@@ -29,10 +29,10 @@ export default function CompareText() {
     const group = getRootProps();
 
     useEffect(() => {
+        setSample(nextSample);
         getComparison()
             .then((res) => {
                 setNextSample(res);
-                setSample(nextSample);
                 setIsLoading(false);
             })
             .catch((error) => console.log(error));
@@ -41,9 +41,13 @@ export default function CompareText() {
     const confirmChoice = async () => {
         if (!sample || currentNumberKey === -1) return;
         setIsLoading(true);
-        const data = await updateComparison(
+
+        console.log(sample);
+
+        const data = await createComparison(
             currentNumberKey === 0 ? true : false,
-            sample.comparison_id
+            sample.text_id_1.toString(),
+            sample.text_id_2.toString()
         );
 
         if (data.message === "success") {

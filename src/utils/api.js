@@ -1,6 +1,6 @@
 export const getComparison = async () => {
     const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: {
             accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -8,7 +8,7 @@ export const getComparison = async () => {
     };
 
     const response = await fetch(
-        "http://vm.eleuther.ai:8888/api/v1/filter/comparisons",
+        "http://vm.eleuther.ai:8888/api/v1/filter/comparisons/sample_pair",
         requestOptions
     );
     const data = await response.json();
@@ -17,14 +17,16 @@ export const getComparison = async () => {
 };
 
 
-export const updateComparison = async (item_1_is_better, id) => {
+export const createComparison = async (item_1_is_better, test_sample_id_1, test_sample_id_2) => {
     const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
             accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify({ item_1_is_better: item_1_is_better, id: id })
+        body: JSON.stringify({ item_1_is_better: item_1_is_better, 
+                                test_sample_id_1: test_sample_id_1, 
+                                test_sample_id_2: test_sample_id_2 })
     };
 
     const response = await fetch(
