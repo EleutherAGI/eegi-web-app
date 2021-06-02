@@ -46,8 +46,8 @@ export default function CompareText() {
 
         const data = await createComparison(
             currentNumberKey === 0 ? true : false,
-            sample.text_id_1.toString(),
-            sample.text_id_2.toString()
+            sample.text_id_1,
+            sample.text_id_2
         );
 
         if (data.message === "success") {
