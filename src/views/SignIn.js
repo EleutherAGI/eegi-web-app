@@ -10,7 +10,8 @@ import {
     InputRightElement,
     Container,
     CircularProgress,
-    Link
+    Link,
+    VStack
 } from "@chakra-ui/react";
 
 import { signIn } from "../utils/auth";
@@ -47,7 +48,7 @@ const SignIn = () => {
     };
 
     return (
-        <>
+        <VStack align="start" spacing={2}>
             <form onSubmit={handleSubmit}>
                 <Heading mb="1rem">Sign In</Heading>
                 <Stack spacing={8}>
@@ -96,7 +97,7 @@ const SignIn = () => {
                     </Button>
                 </Stack>
             </form>
-        </>
+        </VStack>
     );
 };
 

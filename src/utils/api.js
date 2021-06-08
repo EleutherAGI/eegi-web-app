@@ -162,7 +162,7 @@ export const registerUser = async (email, password, name, is_admin, is_active) =
 
     const data = await response.json();
 
-    if (data.message != "success" && response) {
+    if (data.message !== "success" && response) {
         return data;
     }
 
@@ -192,7 +192,7 @@ export const updateUser = async (id, name, is_admin, is_active) => {
 
     const data = await response.json();
 
-    if (data.message != "success" && response) {
+    if (data.message !== "success" && response) {
         return data;
     }
 

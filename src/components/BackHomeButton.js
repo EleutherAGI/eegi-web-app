@@ -1,6 +1,7 @@
 import { Link as RouterLink } from "react-router-dom"
 import { Link, Button } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import React from "react";
 
 export default function BackHomeButton() {
     return (

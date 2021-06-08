@@ -1,17 +1,11 @@
 import React from "react";
 
 import {
-    Heading,
-    Center,
     Container,
-    VStack,
     Box,
     Flex,
-    Spacer,
-    Image,
     Text,
     Link,
-    Button
 } from "@chakra-ui/react";
 
 export default function Footer() {

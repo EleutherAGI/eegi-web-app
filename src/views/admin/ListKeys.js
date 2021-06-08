@@ -1,5 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading, Button, Link, VStack, Container, Text, Flex, Spacer, Box } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { getKeys } from "../../utils/api";
@@ -9,10 +9,10 @@ import { withRouter } from "react-router-dom";
 
 
 const ListKeys = ({match}) => {
-    const [page, setPage] = useState(Number.isNaN(parseInt(match.params.page)) ? 1 : parseInt(match.params.page) );
+    const [page, setPage] = useState(Number.isNaN(parseInt(match.params.page, 10)) ? 1 : parseInt(match.params.page, 10) );
     const [users, setUsers] = useState([]);
 
-    console.log(Number.isNaN(parseInt(match.params.page)) ? 1 : parseInt(match.params.page) )
+    console.log(Number.isNaN(parseInt(match.params.page, 10)) ? 1 : parseInt(match.params.page, 10) )
 
     useEffect(() => {
         console.log(page)
@@ -27,12 +27,12 @@ const ListKeys = ({match}) => {
     return (
         <VStack align="start" spacing={2}>
             <Heading mb="1rem">Page Number: {page}</Heading>
-            {users.length == 0 ? (
+            {users.length === 0 ? (
             <Text>
                 No results on this page
             </Text>
             ) : (
-                <>
+                <VStack align="start" spacing={2}>
                     {users.map((value, i) => (
                         <Container
                             key = {i}
@@ -58,7 +58,7 @@ const ListKeys = ({match}) => {
                             </VStack>
                         </Container>
                     ))}
-                </>
+                </VStack>
             )}
         <Box w="100%">
             <Flex>

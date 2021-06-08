@@ -1,10 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Heading, Button, Text, Link } from "@chakra-ui/react";
+import { Heading, Button, Text, Link, VStack } from "@chakra-ui/react";
+import React from "react";
 
 export default function Home() {
     return (
-        <>
+        <VStack align="start" spacing={2}>
             <Heading mb="1rem">Welcome to EEGI!</Heading>
             <Text
                 color="gray.400"
@@ -31,6 +32,6 @@ export default function Home() {
                     Begin
                 </Button>
             </Link>
-        </>
+        </VStack>
     );
 }

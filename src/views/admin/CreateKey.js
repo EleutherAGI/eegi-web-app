@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory, Link as RouterLink } from "react-router-dom";
 import uuid from "uuid";
 import {
     Heading,
@@ -11,7 +10,8 @@ import {
     InputRightElement,
     CircularProgress,
     Container,
-    Link
+    VStack,
+    Text
 } from "@chakra-ui/react";
 
 import { createKey } from "../../utils/api";
@@ -21,7 +21,7 @@ export default function CreateKey() {
     // TODO Update backend to support "admin key"
     // TODO Attach this function to the backend
 
-    const history = useHistory();
+    //const history = useHistory();
     const [key, setKey] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
     const [error, setError] = useState("");
@@ -42,7 +42,7 @@ export default function CreateKey() {
         } else {
             const data = await createKey(key, isAdmin);
 
-            if (data.message == "success") {
+            if (data.message === "success") {
                 setShowSignupSuccess(true);
             } else {
                 setIsLoading(false);
@@ -54,7 +54,7 @@ export default function CreateKey() {
     };
 
     return (
-        <>
+        <VStack align="start" spacing={2}>
             {showSignupSuccess ? (
                 <Container maxW="container.lg">
                     <Heading mb="1rem">Key Created</Heading>
@@ -107,6 +107,6 @@ export default function CreateKey() {
                     </Stack>
                 </form>
             )}
-        </>
+        </VStack>
     );
 }

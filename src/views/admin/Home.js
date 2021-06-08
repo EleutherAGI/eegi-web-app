@@ -1,10 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Heading, Button, Link, VStack } from "@chakra-ui/react";
 import { Search2Icon, EditIcon, AddIcon } from "@chakra-ui/icons";
+import React from "react";
 
 export default function AdminHome() {
     return (
-        <>
+        <VStack align="start" spacing={2}>
             <VStack align="start" spacing={2}>
                 <Heading mb="1rem">Admin panel</Heading>
                 <Link as={RouterLink} to="/admin/list_users">
@@ -38,6 +39,6 @@ export default function AdminHome() {
                     </Button>
                 </Link>
             </VStack>
-        </>
+        </VStack>
     );
 }

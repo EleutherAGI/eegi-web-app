@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Heading,
     Button,
@@ -81,7 +81,7 @@ export default function CompareText() {
 
     const StartPage = () => {
         return (
-            <>
+            <VStack align="start" spacing={2}>
                 <Heading size="lg">Thanks for helping out</Heading>
                 <Text>
                     you will be shown two peices of text and you have to select
@@ -94,13 +94,13 @@ export default function CompareText() {
                 >
                     Get started
                 </Button>
-            </>
+            </VStack>
         );
     };
 
     const CompareTextPage = () => {
         return (
-            <>
+            <VStack align="start" spacing={2}>
                 <Heading textAlign="center" size="lg" width="100%">
                     Dataset Filtering Experiment
                 </Heading>
@@ -131,7 +131,7 @@ export default function CompareText() {
                         "Confirm"
                     )}
                 </Button>
-            </>
+            </VStack>
         );
     };
 
