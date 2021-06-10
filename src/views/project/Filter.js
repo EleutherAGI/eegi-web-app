@@ -36,7 +36,7 @@ export default function CompareText() {
                 setIsLoading(false);
             })
             .catch((error) => console.log(error));
-    }, [page]);
+    }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const confirmChoice = async () => {
         if (!sample || currentNumberKey === -1) return;
