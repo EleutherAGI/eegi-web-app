@@ -1,8 +1,6 @@
 import {
     Heading,
-    Center,
     Container,
-    VStack,
     Box,
     Flex,
     Spacer,
@@ -16,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import EaiLogo from "../../images/eai_logo.png";
 import { logout, checkIfAuthenticated, checkIfAdmin } from "../../utils/auth";
 import { withRouter } from "react-router-dom";
+import React  from 'react';
 
 const Header = ({ history, isAuthenticated }) => {
     return (

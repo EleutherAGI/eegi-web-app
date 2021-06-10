@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import {
     Heading,
@@ -11,13 +11,14 @@ import {
     InputRightElement,
     CircularProgress,
     Container,
-    Link
+    Link,
+    VStack
 } from "@chakra-ui/react";
 
 import { signUp } from "../utils/auth";
 
 export default function SignUp() {
-    const history = useHistory();
+    //const history = useHistory();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -47,7 +48,7 @@ export default function SignUp() {
         } else {
             const data = await signUp(email, password, name, key);
 
-            if (data.message == "success") {
+            if (data.message === "success") {
                 setShowSignupSuccess(true);
             } else {
                 setIsLoading(false);
@@ -59,7 +60,7 @@ export default function SignUp() {
     };
 
     return (
-        <>
+        <VStack align="start" spacing={2}>
             {showSignupSuccess ? (
                 <Container maxW="container.lg">
                     <Heading mb="1rem">Sign up Success!</Heading>
@@ -142,6 +143,6 @@ export default function SignUp() {
                     </Stack>
                 </form>
             )}
-        </>
+        </VStack>
     );
 }

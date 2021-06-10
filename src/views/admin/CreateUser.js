@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import {
     Heading,
@@ -13,12 +13,13 @@ import {
     Container,
     Link,
     Checkbox,
+    VStack
 } from "@chakra-ui/react";
 
 import { registerUser } from "../../utils/api";
 
 export default function CreateUser() {
-    const history = useHistory();
+    //const history = useHistory();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -47,7 +48,7 @@ export default function CreateUser() {
         } else {
             const data = await registerUser(email, password, name, isAdmin, isActive);
             
-            if (data.message == "success") {
+            if (data.message === "success") {
                 setShowSignupSuccess(true);
             } else {
                 setIsLoading(false);
@@ -59,7 +60,7 @@ export default function CreateUser() {
     };
 
     return (
-        <>
+        <VStack align="start" spacing={2}>
             {showSignupSuccess ? (
                 <Container maxW="container.lg">
                     <Heading mb="1rem">Sign up Success!</Heading>
@@ -136,6 +137,6 @@ export default function CreateUser() {
                     </Stack>
                 </form>
             )}
-        </>
+        </VStack>
     );
 }

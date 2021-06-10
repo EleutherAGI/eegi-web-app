@@ -12,7 +12,7 @@ export const checkIfAdmin = () => {
     const sub = localStorage.getItem("user");
     const admin = localStorage.getItem("permission");
 
-    if (!sub || admin == "false") {
+    if (!sub || admin === "false") {
         return false;
     }
     return true;
@@ -60,7 +60,7 @@ export const signUp = async (email, password, name, key) => {
 
     const data = await response.json();
 
-    if (data.message != "success" && response) {
+    if (data.message !== "success" && response) {
         return data;
     }
 

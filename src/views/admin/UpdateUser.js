@@ -1,8 +1,6 @@
-import { Link as RouterLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading, 
     Button, 
-    Link, 
     VStack, 
     Input, 
     Stack, 
@@ -13,7 +11,7 @@ import { withRouter } from "react-router-dom";
 import { getUser, updateUser } from "../../utils/api";
 
 
-const UpdateUser = ({match}) => {
+const UpdateUser = ({match, history}) => {
     const [userId, setUserId] = useState(match.params.id ? match.params.id : "");
     const [user, setUser] = useState([]);
 
@@ -30,7 +28,7 @@ const UpdateUser = ({match}) => {
     // TODO Finish implementing modify user
 
     useEffect(() => {
-        if(userId != ""){
+        if(userId !== ""){
             setIsLoading(true)
             getUser(userId)
             .then((res) => {
@@ -70,6 +68,7 @@ const UpdateUser = ({match}) => {
         } else {
             const data = await updateUser(user.id, name, isAdmin, isActive);
 
+            // TODO not sure what this does
             if (data.access_token && data.session_id && !!data.user.is_active) {
                 history.replace("/");
             } else {
@@ -83,7 +82,7 @@ const UpdateUser = ({match}) => {
 
     return (
         <VStack align="start" spacing={2}>
-            {userId == "" ? (
+            {userId === "" ? (
                 <form onSubmit={handleGetUser}>
                     <Stack spacing={8}>
                     <Heading mb="1rem">Enter user ID</Heading>

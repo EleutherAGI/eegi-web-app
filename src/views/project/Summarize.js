@@ -79,11 +79,11 @@ export default function CompareSummary() {
     }, [setChosenSummary, chosenSummary, setCurrentNumberKey]);
 
     return (
-        <>
+        <VStack align="start" spacing={2}>
             <VStack align="start" spacing={8}>
                 <BackHomeButton />
                 {confirmedChoices.length < summaries.length ? (
-                    <>
+                    <VStack align="start" spacing={2}>
                         <Heading textAlign="center" size="lg" width="100%">
                             Summarisation Experiment
                         </Heading>
@@ -128,9 +128,9 @@ export default function CompareSummary() {
                         >
                             Confirm
                         </Button>
-                    </>
+                    </VStack>
                 ) : (
-                    <>
+                    <VStack align="start" spacing={2}>
                         <Heading size="lg">Thank you!</Heading>
                         <Text>
                             You have reached the end of our current demo.
@@ -145,9 +145,9 @@ export default function CompareSummary() {
                                 <Text key={i}>{value}</Text>
                             ))}
                         </VStack>
-                    </>
+                    </VStack>
                 )}
             </VStack>
-        </>
+        </VStack>
     );
 }
