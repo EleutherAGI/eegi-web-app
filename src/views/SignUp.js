@@ -12,6 +12,7 @@ import {
     CircularProgress,
     Container,
     Link,
+    Box,
     VStack
 } from "@chakra-ui/react";
 
@@ -61,6 +62,7 @@ export default function SignUp() {
 
     return (
         <VStack align="start" spacing={2}>
+            <Box margin="auto">
             {showSignupSuccess ? (
                 <Container maxW="container.lg">
                     <Heading mb="1rem">Sign up Success!</Heading>
@@ -143,6 +145,7 @@ export default function SignUp() {
                     </Stack>
                 </form>
             )}
+            </Box>
         </VStack>
     );
 }
