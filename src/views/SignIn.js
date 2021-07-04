@@ -11,6 +11,7 @@ import {
     Container,
     CircularProgress,
     Link,
+    Box,
     VStack
 } from "@chakra-ui/react";
 
@@ -49,6 +50,7 @@ const SignIn = () => {
 
     return (
         <VStack align="start" spacing={2}>
+            <Box margin="auto">
             <form onSubmit={handleSubmit}>
                 <Heading mb="1rem">Sign In</Heading>
                 <Stack spacing={8}>
@@ -97,6 +99,7 @@ const SignIn = () => {
                     </Button>
                 </Stack>
             </form>
+            </Box>
         </VStack>
     );
 };

@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
     useRadioGroup,
     Center,
     Heading,
     Button,
     Text,
+    StackDivider,
     VStack
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
@@ -45,38 +46,38 @@ export default function CompareSummary() {
         name: "summary",
         onChange: setChosenSummary
     });
-    const [currentNumberKey, setCurrentNumberKey] = useState();
+    const [currentNumberKey] = useState();
     const group = getRootProps();
     const confirmChoice = () => {
-        if (chosenSummary == "") return;
+        if (chosenSummary === "") return;
         setConfirmedChoices([...confirmedChoices, chosenSummary]);
         setChosenSummary("");
     };
 
-    useEffect(() => {
-        function handleKeyDown(e) {
-            const char = e.which || e.keyCode;
-            if (e.code === "Space") {
-                confirmChoice();
-            } else if (char === 49) {
-                setCurrentNumberKey(1);
-                setChosenSummary(
-                    summaries[confirmedChoices.length].summaries[0]
-                );
-            } else if (char === 50) {
-                setCurrentNumberKey(2);
-                setChosenSummary(
-                    summaries[confirmedChoices.length].summaries[1]
-                );
-            }
-        }
+    // useEffect(() => {
+    //     function handleKeyDown(e) {
+    //         const char = e.which || e.keyCode;
+    //         if (e.code === "Space") {
+    //             confirmChoice();
+    //         } else if (char === 49) {
+    //             setCurrentNumberKey(1);
+    //             setChosenSummary(
+    //                 summaries[confirmedChoices.length].summaries[0]
+    //             );
+    //         } else if (char === 50) {
+    //             setCurrentNumberKey(2);
+    //             setChosenSummary(
+    //                 summaries[confirmedChoices.length].summaries[1]
+    //             );
+    //         }
+    //     }
 
-        window.addEventListener("keydown", handleKeyDown);
+    //     window.addEventListener("keydown", handleKeyDown);
 
-        return function cleanup() {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [setChosenSummary, chosenSummary, setCurrentNumberKey]);
+    //     return function cleanup() {
+    //         window.removeEventListener("keydown", handleKeyDown);
+    //     };
+    // }, [setChosenSummary, chosenSummary, setCurrentNumberKey, confirmChoice]);
 
     return (
         <VStack align="start" spacing={2}>

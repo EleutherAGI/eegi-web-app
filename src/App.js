@@ -5,6 +5,7 @@ import CompareText from "./views/project/Filter";
 import Home from "./views/Home";
 import SignUp from "./views/SignUp";
 import SignIn from "./views/SignIn";
+import NotFoundPage from "./views/NotFoundPage";
 import PrivateRoute, {AdminRoute} from "./views/PrivateRoute";
 import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
@@ -20,7 +21,6 @@ import UpdateUser from "./views/admin/UpdateUser";
 import React  from 'react';
 
 const App = () => {
-    // TODO show error message if no route match?
     return (
         <Router>
             <VStack h="100vh" align="stretch">
@@ -29,7 +29,7 @@ const App = () => {
                     <Container maxW="container.lg">
                         <Container
                             p={8}
-                            maxWidth="500px"
+                            maxWidth="80%"
                             borderWidth={1}
                             borderRadius={8}
                             boxShadow="lg"
@@ -88,6 +88,7 @@ const App = () => {
                                     path="/admin"
                                     component={AdminHome}
                                 />
+                                 <Route path="*" component={NotFoundPage} />
                             </Switch>
                         </Container>
                     </Container>
